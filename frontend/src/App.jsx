@@ -6,7 +6,8 @@ import './App.css';
 
 ChartJS.register(ArcElement, Tooltip, Legend, CategoryScale, LinearScale, BarElement, Title);
 
-const API_URL = 'http://localhost:5001/api';
+const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5001/api';
+const BASE_URL = API_URL.replace('/api', '');
 
 const App = () => {
   const [token, setToken] = useState(localStorage.getItem('token') || '');
@@ -720,7 +721,7 @@ const App = () => {
                         <div>
                           {tx.Category && <span className="tx-category">{tx.Category.name}</span>}
                           {tx.receiptUrl && (
-                            <a href={`http://localhost:5001${tx.receiptUrl}`} target="_blank" rel="noreferrer" style={{marginLeft: '10px', fontSize: '0.8rem', color: 'var(--accent)'}}>
+                            <a href={`${BASE_URL}${tx.receiptUrl}`} target="_blank" rel="noreferrer" style={{marginLeft: '10px', fontSize: '0.8rem', color: 'var(--accent)'}}>
                               📎 View Receipt
                             </a>
                           )}
